@@ -7,8 +7,8 @@ import httplib2
 import os
 from apiclient import discovery
 import random
-import asynci
-o
+import asyncio
+
 TOKEN = os.environ['TOKEN']
 APIKey = os.environ['APIKEY']
 SpreadsheetId = os.environ['SHEET_ID']
@@ -16,7 +16,7 @@ ReplySheetName = os.environ['REPLY_SHEET']
 RoleSheetName = os.environ['ROLE_SHEET']
 guildid = os.environ['GUILD_ID']
 rolemessageid = os.environ['ROLE_MESSAGE_ID']
-
+SRCLanguage= "zh-TW"
 #Google API
 discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
                     'version=v4')
