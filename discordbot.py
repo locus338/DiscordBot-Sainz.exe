@@ -77,7 +77,7 @@ async def on_raw_reaction_remove(payload):
 
 
 # 收到訊息時呼叫
-@client.command()
+@client.command(aliases=['trans'])
 async def translate(ctx, *, message):
     # 送信者為Bot時無視
     if ctx.message.author == client.user:
