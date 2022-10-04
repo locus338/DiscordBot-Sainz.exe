@@ -1,3 +1,4 @@
+import googletrans
 from distutils.log import error
 import discord
 from discord.ext import commands
