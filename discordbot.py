@@ -9,26 +9,9 @@ from apiclient import discovery
 import random
 import asyncio
 
-TOKEN = os.environ['TOKEN']
-APIKey = os.environ['APIKEY']
-SpreadsheetId = os.environ['SHEET_ID']
-ReplySheetName = os.environ['REPLY_SHEET']
-RoleSheetName = os.environ['ROLE_SHEET']
-guildid = os.environ['GUILD_ID']
-rolemessageid = os.environ['ROLE_MESSAGE_ID']
-SRCLanguage= "zh-TW"
-#Google API
-discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
-                    'version=v4')
-service = discovery.build(
-    'sheets',
-    'v4',
-    http=httplib2.Http(),
-    discoveryServiceUrl=discoveryUrl,
-    developerKey=APIKey)
 
-reactRange = RoleSheetName + '!A2:B'
-rangeName = ReplySheetName + '!A2:D'
+SRCLanguage= "zh-TW"
+
 
 intent=discord.Intents.all()
 client = commands.Bot(command_prefix = "~",intents=intent)
