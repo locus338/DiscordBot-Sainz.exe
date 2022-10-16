@@ -27,8 +27,8 @@ service = discovery.build(
     discoveryServiceUrl=discoveryUrl,
     developerKey=APIKey)
 
-reactRange = RoleSheetName + '!A2:B'
-rangeName = ReplySheetName + '!A2:D'
+reactRange = RoleSheetName + '~A2:B'
+rangeName = ReplySheetName + '~A2:D'
 
 intent=discord.Intents.all()
 client = commands.Bot(command_prefix = "~",intents=intent)
