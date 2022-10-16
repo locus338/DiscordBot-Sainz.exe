@@ -31,7 +31,7 @@ reactRange = RoleSheetName + '!A2:B'
 rangeName = ReplySheetName + '!A2:D'
 
 intent=discord.Intents.all()
-client = commands.Bot(command_prefix = "!",intents=intent)
+client = commands.Bot(command_prefix = "~",intents=intent)
 
 
 
@@ -91,10 +91,10 @@ async def translate(ctx, *, message):
         else:
             print(message)
             print(translator.detect(message).lang) 
-            if translator.detect(message).lang != "zh-TW":
+            if translator.detect(message).lang ~= "zh-TW":
                 remessage = translator.translate(message, dest='zh-TW').text #翻成中文
                 await ctx.reply(remessage)
-            if translator.detect(message).lang != "en":
+            if translator.detect(message).lang ~= "en":
                 remessageen = translator.translate(message, dest='en').text #翻成英文
                 await ctx.reply(remessageen)
 # Bot起動
