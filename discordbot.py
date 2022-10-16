@@ -41,38 +41,6 @@ client = commands.Bot(command_prefix = "~",intents=intent)
 async def on_ready():
     print('成功登入')
 
-#添加身分組
-@client.event
-async def on_raw_reaction_add(payload):
-    if str(payload.message_id) == rolemessageid:
-        guild = client.get_guild(int(guildid))
-        result = service.spreadsheets().values().get(
-        spreadsheetId=SpreadsheetId, range=reactRange).execute()
-        values = result.get('values', [])
-        if not values:
-            return
-        for row in values:
-            if payload.emoji.name == row[0]:
-                role = discord.utils.get(guild.roles, name=row[1])
-                if not role == None:
-                    await payload.member.add_roles(role)
-
-#移除身分組
-@client.event
-async def on_raw_reaction_remove(payload):
-    if str(payload.message_id) == rolemessageid:
-        guild = client.get_guild(int(guildid))
-        result = service.spreadsheets().values().get(
-        spreadsheetId=SpreadsheetId, range=reactRange).execute()
-        values = result.get('values', [])
-        if not values:
-            return
-        for row in values:
-            if payload.emoji.name == row[0]:
-                role = discord.utils.get(guild.roles, name=row[1])
-                member = discord.utils.get(guild.members, id=payload.user_id)
-                if not role == None:
-                    await member.remove_roles(role)
 
 
 
