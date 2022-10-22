@@ -28,7 +28,7 @@ async def on_ready():
 
 
 # 收到訊息時呼叫
-@client.command(aliases=['tran,t'])
+@client.command(aliases=['tran','t'])
 async def translate(ctx, *, message):
     # 送信者為Bot時無視
     if ctx.message.author == client.user:
