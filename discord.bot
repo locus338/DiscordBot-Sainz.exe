@@ -23,29 +23,12 @@ async def on_ready():
     print('成功登入')
 
 
-#移除身分組
-@client.event
-async def on_raw_reaction_remove(payload):
-    if str(payload.message_id) == rolemessageid:
-        guild = client.get_guild(int(guildid))
-        result = service.spreadsheets().values().get(
-        spreadsheetId=SpreadsheetId, range=reactRange).execute()
-        values = result.get('values', [])
-        if not values:
-            return
-        for row in values:
-            if payload.emoji.name == row[0]:
-                role = discord.utils.get(guild.roles, name=row[1])
-                member = discord.utils.get(guild.members, id=payload.user_id)
-                if not role == None:
-                    await member.remove_roles(role)
-
 
 
 # 收到訊息時呼叫
-@client.event
-async def on_message(message):
-   # 送信者為Bot時無視
+@client.command(aliases=['tran''t'])
+async def translate(ctx, *, message):
+    # 送信者為Bot時無視
     if ctx.message.author == client.user:
         print("逼逼逼")
         return
@@ -63,6 +46,5 @@ async def on_message(message):
             if translator.detect(message).lang != "en":
                 remessageen = translator.translate(message, dest='en').text #翻成英文
                 await ctx.reply(remessageen)
-
 # Bot起動
 client.run(TOKEN)
