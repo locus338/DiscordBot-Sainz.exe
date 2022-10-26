@@ -7,7 +7,7 @@ import os
 from apiclient import discovery
 import random
 import asyncio
-token = os.environ['TOKEN']
+token = os.getenv['TOKEN']
 
 
 
