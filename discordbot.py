@@ -48,4 +48,4 @@ async def translate(ctx, *, message):
               remessageen = translator.translate(message, dest='en').text #翻成英文
               await ctx.reply(remessageen)
 # Bot起動
-client.run(TOKEN)
+bot.run(TOKEN)
