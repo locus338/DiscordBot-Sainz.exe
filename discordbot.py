@@ -9,7 +9,7 @@ from apiclient import discovery
 import random
 import asyncio
 
-TOKEN = os.getenv['TOKEN']
+token = os.getenv['TOKEN']
 SRCLanguage= "zh-TW"
 
 
