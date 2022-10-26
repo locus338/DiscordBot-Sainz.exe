@@ -11,6 +11,7 @@ token = os.getenv['TOKEN']
 
 
 
+
 intent=discord.Intents.all()
 client = commands.Bot(command_prefix = "~",intents=intent)
 
