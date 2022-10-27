@@ -44,13 +44,13 @@ async def translate(ctx, *, message):
         translator = googletrans.Translator()
         if translator.detect(message).lang == 'zh-CN': #判斷text是其他語言則翻成中文
            pass
- else:
-     print(translator.detect(message).lang)
-     if translator.detect(message).lang != "zh-TW":
-        remessage = translator.translate(message, dest='zh-TW').text #翻成中文
-        await ctx.reply(remessage)
+    else:
+        print(translator.detect(message).lang)
+        if translator.detect(message).lang != "zh-TW":
+            remessage = translator.translate(message, dest='zh-TW').text #翻成中文
+            await ctx.reply(remessage)
         if translator.detect(message).lang != "en":
-           remessageen = translator.translate(message, dest='en').text #翻成英文
-           await ctx.reply(remessageen)
+            remessageen = translator.translate(message, dest='en').text #翻成英文
+            await ctx.reply(remessageen)
 # Bot起動
-client.run(TOKEN) 
+bot.run(TOKEN) 
