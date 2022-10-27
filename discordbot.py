@@ -8,7 +8,7 @@ import os
 from apiclient import discovery
 import random
 import asyncio
-token = os.getenv(TOKEN)
+token = os.getenv"TOKEN"
 
 
 
@@ -52,4 +52,4 @@ async def translate(ctx, *, message):
             remessageen = translator.translate(message, dest='en').text #翻成英文
             await ctx.reply(remessageen)
 # Bot起動
-bot.run(TOKEN) 
+bot.run"TOKEN"
