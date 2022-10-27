@@ -44,7 +44,6 @@ async def translate(ctx, *, message):
         translator = googletrans.Translator()
         if translator.detect(message).lang == 'zh-CN': #判斷text是其他語言則翻成中文
            pass
-    else:
         print(translator.detect(message).lang)
         if translator.detect(message).lang != "zh-TW":
             remessage = translator.translate(message, dest='zh-TW').text #翻成中文
