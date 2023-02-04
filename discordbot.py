@@ -1,11 +1,10 @@
 import os
 from threading
 from flask import Flask, render_template
-app = Flask(__name__)
 
-@app.route('/hello')
-def hello():
-    return 'hello!'
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")
