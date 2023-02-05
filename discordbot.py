@@ -1,5 +1,7 @@
 import os
 import discord
+intent = discord.Intents.all()
+intent.message_content = True
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
