@@ -1,10 +1,10 @@
 import os
 import discord
-intent = discord.Intents.all()
-intent.message_content = True
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
+intent = discord.Intents.all()
+intent.message_content = True
 app = Flask(__name__,template_folder="Templates")
 bot = commands.Bot(command_prefix="~", intents=intent)
 
