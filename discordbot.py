@@ -13,9 +13,9 @@ def index():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    token = os.getenv("TOKEN")
-    bot.run(token)    
+    token = os.getenv("TOKEN")    
     stay()
+    bot.run(token)
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
 def stay():
