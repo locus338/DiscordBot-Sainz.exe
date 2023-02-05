@@ -2,7 +2,7 @@ import os
 from threading import Thread
 from flask import Flask, render_template
 app = Flask(__name__,template_folder="Templates")
-client = commands.Bot(command_prefix="~", intents=intent)
+bot = commands.Bot(command_prefix="~", intents=intent)
 
 @app.route('/')
 def index():
