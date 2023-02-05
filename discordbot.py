@@ -25,14 +25,14 @@ async def on_ready():
    print('成功登入')
 
 # 收到訊息時呼叫
-@client.command(aliases=['trans', 't'])
+@bot.command(aliases=['trans', 't'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
    if message is None:
        await ctx.reply("請輸入要翻譯的內容")
        return
 
    # 送信者為Bot時無視
-   if ctx.message.author == client.user:
+   if ctx.message.author == bot.user:
        print("逼逼逼")
        return
    else:
