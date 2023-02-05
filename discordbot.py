@@ -1,4 +1,6 @@
 import os
+import discord
+from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
 app = Flask(__name__,template_folder="Templates")
