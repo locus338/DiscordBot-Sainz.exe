@@ -20,7 +20,7 @@ def index():
 SRCLanguage = "zh-TW"
 
 # 起動時呼叫
-@client.event
+@bot.event
 async def on_ready():
    print('成功登入')
 
