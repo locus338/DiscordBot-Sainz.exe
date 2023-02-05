@@ -1,5 +1,6 @@
 import os
 import discord
+import typing
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
