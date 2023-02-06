@@ -62,7 +62,6 @@ async def on_raw_reaction_add(self,data):
 
 def setup(bot):
 bot.add_cog(Event(bot)) 
-
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
