@@ -56,7 +56,7 @@ async def on_raw_reaction_add(self,data):
   #判斷反映貼圖給予相對應身分組
   if str(data.emoji) == '<:scare:1072124241811611668>':
      print("有進來")
-     guild = self.bot.get_guild(data.guild_id) # 取得當前所在伺服器
+     guild = bot.get_guild(data.guild_id) # 取得當前所在伺服器
      role = guild.get_role(1072098531910881290) #取得伺服器內指定的身分組
      await data.member.add_roles(role) # 給予該成員身分組
 
