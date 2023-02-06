@@ -51,7 +51,7 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
            remessageen = translator.translate(message, dest='en').text  # 翻成英文
            await ctx.reply(remessageen)
 
-@commands.Cog.listener()
+@bot.event
 async def on_raw_reaction_add(self,data): 
     #判斷反映貼圖給予相對應身分組
     if str(data.emoji) == '<:scare:1072098451237634048>':
@@ -60,8 +60,6 @@ async def on_raw_reaction_add(self,data):
        role = guild.get_role(1072098531910881290) #取得伺服器內指定的身分組
        await data.member.add_roles(role) # 給予該成員身分組
 
-def setup(bot):
-bot.add_cog(Event(bot)) 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
