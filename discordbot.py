@@ -52,7 +52,7 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
            await ctx.reply(remessageen)
 
 @bot.event
-async def on_raw_reaction_add(self,data): 
+async def on_raw_reaction_add(data): 
   #判斷反映貼圖給予相對應身分組
   if str(data.emoji) == '<:scare:1072124241811611668>':
      print("有進來")
