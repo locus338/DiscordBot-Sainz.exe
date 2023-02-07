@@ -69,7 +69,7 @@ async def on_raw_reaction_remove(payload):
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1072098531910881290))
 
-@bot.command()
+@bot.command(aliases=['PING',' 'pings', 'Ping','Pings']
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
 
