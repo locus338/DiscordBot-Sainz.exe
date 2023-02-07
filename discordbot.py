@@ -68,7 +68,7 @@ async def on_raw_reaction_remove(payload):
         guild = bot.get_guild(payload.guild_id)
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1072098531910881290))
-        await payload.member.remove_roles(role)
+        await user.send(f"已移除{role}身分組")
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
