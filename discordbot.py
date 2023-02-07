@@ -71,7 +71,7 @@ async def on_raw_reaction_remove(payload):
 
 @bot.command()
 async def ping(ctx):
-   await ctx.send(P'{round(bot.latency*1000)} (ms)')  
+   await ctx.send(F'{round(bot.latency*1000)} (ms)')  
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
