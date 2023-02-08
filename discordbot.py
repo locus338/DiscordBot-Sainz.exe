@@ -77,11 +77,6 @@ async def on_ready():
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
-@bot.command
-async def on_message(self, msg): 
-    keyword=['~help', '~HELP', '~Help'] 
-    if msg.content in keyword and msg.author != self.bot.user:
-       await msg.channel.send('敬請期待')
 @bot.command()
 async def help(ctx):
    await ctx.send(f"敬請期待")
