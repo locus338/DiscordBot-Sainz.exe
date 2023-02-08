@@ -70,7 +70,7 @@ async def on_raw_reaction_remove(payload):
         await user.remove_roles(guild.get_role(1072098531910881290))
 @bot.event
 async def on_ready():
-    print('目前登入身份：',client.user)
+    print('目前登入身份：',bot.user)
     game = discord.Game('EK')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await client.change_presence(status=discord.Status.idle, activity=game)
