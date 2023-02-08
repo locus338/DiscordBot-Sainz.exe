@@ -73,7 +73,7 @@ async def on_ready():
     print('目前登入身份：',bot.user)
     game = discord.Game('EK')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
-    await client.change_presence(status=discord.Status.idle, activity=game)
+    await bot.change_presence(status=discord.Status.idle, activity=game)
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
