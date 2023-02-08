@@ -68,7 +68,7 @@ async def on_raw_reaction_remove(payload):
         guild = bot.get_guild(payload.guild_id)
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1072098531910881290))
-@bot.event()
+@bot.event
 async def on_ready():
     print('目前登入身份：',client.user)
     game = discord.Game('EK')
