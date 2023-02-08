@@ -73,10 +73,15 @@ async def on_ready():
     print('目前登入身份：',bot.user)
     game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
-    await bot.change_presence(status=discord.Status.idle, activity=game)
+    await bot.change_presence(status=discord.Status.online, activity=game)
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
+@bot.command
+async def on_message(self, msg): 
+    keyword=['~help', '~HELP', '~Help'] 
+    if msg.content in keyword and msg.author != self.bot.user:
+       await msg.channel.send('敬請期待')
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
