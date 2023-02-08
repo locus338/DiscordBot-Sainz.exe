@@ -82,6 +82,9 @@ async def on_message(self, msg):
     keyword=['~help', '~HELP', '~Help'] 
     if msg.content in keyword and msg.author != self.bot.user:
        await msg.channel.send('敬請期待')
+@bot.command()
+async def help(ctx):
+   await ctx.send(f"敬請期待")
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
