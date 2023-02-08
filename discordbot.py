@@ -77,9 +77,6 @@ async def on_ready():
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
-@bot.command()
-async def help(ctx):
-   await ctx.send(f"敬請期待")
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
