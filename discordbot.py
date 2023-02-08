@@ -71,7 +71,7 @@ async def on_raw_reaction_remove(payload):
 @bot.event
 async def on_ready():
     print('目前登入身份：',bot.user)
-    game = discord.Game('EK')
+    game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.idle, activity=game)
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
