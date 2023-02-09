@@ -74,10 +74,6 @@ async def on_ready():
     game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.online, activity=game)
-@bot.event
-async def on_message(message):
-  if message.content == 'https://disocrd.gg/':
-     await message.delete()
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
