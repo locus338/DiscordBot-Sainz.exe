@@ -76,7 +76,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
 @bot.event
 async def on_message(message):
-    if message.content == '我好帥喔':
+    if message.content == 'discord.gg':
         await message.delete()
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
