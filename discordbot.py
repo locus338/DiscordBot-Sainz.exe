@@ -54,6 +54,10 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
            await ctx.reply(remessageen)
 
 @bot.event
+async def on_message(message:discord.Message):
+    if not (theRegex.match(message.content) == None):
+        await message.delete()
+@bot.event
 async def on_raw_reaction_add(payload): 
   #判斷反映貼圖給予相對應身分組
   if payload.message_id == 1072171521193300021:
