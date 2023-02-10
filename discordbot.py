@@ -69,15 +69,16 @@ async def on_raw_reaction_remove(payload):
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1072098531910881290))
 @bot.event
-async def on_message(message):
-   if message.content == 'discord.gg':
-      await message.delete()
-@bot.event
 async def on_ready():
     print('目前登入身份：',bot.user)
     game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.online, activity=game) 
+@bot.event
+async def on_message(message):
+   print(type(message))
+   if message.content == 'disocrd.gg':
+      await message.delete()
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)}ms')  
