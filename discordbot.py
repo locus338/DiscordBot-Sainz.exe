@@ -10,7 +10,7 @@ intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__,template_folder="Templates")
 bot = commands.Bot(command_prefix="~", intents=intent , help_command=None)
-client=commands.Bot(token="xyz",intents=discord.Intents.All)
+client=commands.Bot(token="xyz",intents=discord.Intents.all())
 theRegex=re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
 
 def run():
