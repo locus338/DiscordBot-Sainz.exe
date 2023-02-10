@@ -70,7 +70,7 @@ async def on_raw_reaction_remove(payload):
         await user.remove_roles(guild.get_role(1072098531910881290))
 @bot.event
 async def on_message(message):
-   if message.content == 'disocrd.gg':
+   if message.content == 'discord.gg':
       await message.delete()
 @bot.event
 async def on_ready():
