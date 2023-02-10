@@ -2,6 +2,9 @@ import os
 import discord
 import typing
 import googletrans
+import re
+import disnake
+from disnake.ext import commands
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
@@ -9,6 +12,8 @@ intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__,template_folder="Templates")
 bot = commands.Bot(command_prefix="~", intents=intent , help_command=None)
+client=commands.Bot(token="xyz",intents=discord.Intents.All)
+theRegex=re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
 
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
@@ -75,10 +80,9 @@ async def on_ready():
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.online, activity=game) 
 @bot.event
-async def on_message(message):
-   print(type(message))
-   if message.content == 'disocrd.gg':
-      await message.delete()
+async def on_message(message:discord.Message):
+    if not (theRegex.match(message.content) == None) :
+        await message.delete()
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)}ms')  
