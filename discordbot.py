@@ -76,7 +76,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
-   await ctx.send(F'{round(bot.latency*1000)} (ms)')  
+   await ctx.send(F'{round(bot.latency*1000)}ms')  
 @bot.command()
 async def help(ctx):
     await ctx.send(f"尚在製作中...")
@@ -85,3 +85,4 @@ if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
     bot.run(token)
+
