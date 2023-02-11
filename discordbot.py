@@ -21,11 +21,12 @@ def stay():
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="t!",intents=discord.Intents.all())
+        
+ super().__init__(command_prefix="t!",intents=discord.Intents.all())
     
-async def on_ready(self):
-      print("Bot is online")
-      self.add_cog(Main(self))
+     async def on_ready(self):
+         print("Bot is online")
+         self.add_cog(Main(self))
 
 class Main(commands.Cog):
     def __init__(self,bot):
