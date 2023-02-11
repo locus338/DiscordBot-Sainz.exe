@@ -20,8 +20,8 @@ def stay():
     thread.start()
 
 class Bot(commands.Bot):
-def __init__(self):
-    super().__init__(command_prefix="t!",intents=discord.Intents.all())
+    def __init__(self):
+        super().__init__(command_prefix="t!",intents=discord.Intents.all())
     
 async def on_ready(self):
       print("Bot is online")
