@@ -6,6 +6,7 @@ import re
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
+from flask import Flask
 intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__,template_folder="Templates")
@@ -15,6 +16,27 @@ theRegex=re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
 def stay():
+    class Bot(commands.Bot):
+    def __init__(self):
+        super().__init__(command_prefix="t!",intents=discord.Intents.all())
+    
+    async def on_ready(self):
+        print("Bot is online")
+        self.add_cog(Main(self))
+
+class Main(commands.Cog):
+    def __init__(self,bot):
+        self.bot=bot
+
+    @commands.command()
+    async def hello(self,message):
+        print("Hello")
+
+    @commands.Cog.listener()
+    async def on_message(self,message):
+       if not (theRegex.match(message.content) == None):
+          await message.delete()   
+       print("onMessage")
     thread = Thread(target=run)
     thread.start()
 
@@ -27,11 +49,6 @@ SRCLanguage = "zh-TW"
 @bot.event
 async def on_ready():
    print('成功登入')
-
-@bot.event
-async def on_message(message:discord.Message):
-    if not (theRegex.match(message.content) == None):
-        await message.delete()
 
 # 收到訊息時呼叫
 @bot.command(aliases=['trans', 't'])
@@ -91,4 +108,5 @@ async def help(ctx):
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
+    bot=Bot() 
     bot.run(token)
