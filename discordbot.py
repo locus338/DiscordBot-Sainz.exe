@@ -28,8 +28,8 @@ async def on_ready(self):
       self.add_cog(Main(self))
 
 class Main(commands.Cog):
-    def __init__(self,bot):
-        self.bot=bot
+def __init__(self,bot):
+    self.bot=bot
 
     @commands.command()
     async def hello(self,message):
