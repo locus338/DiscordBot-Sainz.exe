@@ -60,11 +60,12 @@ SRCLanguage = "zh-TW"
 bot = Bot()
 
 
-@bot.command(aliases=['trans', 't'])
+@commands.command(aliases=['trans', 't'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
+    print("translate")
     if message is None:
-        await ctx.reply("請輸入要翻譯的內容")
-        return
+       await ctx.reply("請輸入要翻譯的內容")
+       return
 
     # 送信者為Bot時無視
     if ctx.message.author == bot.user:
