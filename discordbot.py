@@ -52,7 +52,7 @@ class Main(commands.Cog):
     async def translate(ctx, *, message: typing.Optional[str] = None):
         print("translate")
         if message is None:
-            await ctx.reply("請輸入要翻譯的內容")
+            await ctx.reply(self,"請輸入要翻譯的內容")
             return
         if ctx.message.author == bot.user:
             print("逼逼逼")
@@ -71,7 +71,7 @@ class Main(commands.Cog):
                 remessageen = translator.translate(message, dest='en').text  # 翻成英文
                 await ctx.reply(remessageen)
     @commands.Cog.listener()
-    async def on_raw_reaction_add(payload):
+    async def on_raw_reaction_add(self,payload):
         # 判斷反映貼圖給予相對應身分組
         if payload.message_id == 1072171521193300021:   
             if str(payload.emoji) == '✅':
@@ -82,7 +82,7 @@ class Main(commands.Cog):
 
 
     @commands.Cog.listener()
-    async def on_raw_reaction_remove(payload):
+    async def on_raw_reaction_remove(self,payload):
         if payload.message_id == 1072171521193300021:
             if str(payload.emoji) == '✅':
                 # 取得伺服器
@@ -92,14 +92,14 @@ class Main(commands.Cog):
 
 
     @commands.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
-    async def ping(ctx):
+    async def ping(self,ctx):
         await ctx.send(F'{round(bot.latency*1000)}ms')
 
 
         
 
     @commands.command()
-    async def help(ctx):
+    async def help(self,ctx):
         await ctx.send(f"尚在製作中...")
 
 
