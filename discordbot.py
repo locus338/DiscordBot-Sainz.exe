@@ -16,13 +16,16 @@ theRegex=re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
 def stay():
-    class Bot(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix="t!",intents=discord.Intents.all())
+    thread = Thread(target=run)
+    thread.start()
+
+class Bot(commands.Bot):
+def __init__(self):
+    super().__init__(command_prefix="t!",intents=discord.Intents.all())
     
-    async def on_ready(self):
-        print("Bot is online")
-        self.add_cog(Main(self))
+async def on_ready(self):
+      print("Bot is online")
+      self.add_cog(Main(self))
 
 class Main(commands.Cog):
     def __init__(self,bot):
@@ -37,8 +40,6 @@ class Main(commands.Cog):
        if not (theRegex.match(message.content) == None):
           await message.delete()   
        print("onMessage")
-    thread = Thread(target=run)
-    thread.start()
 
 @app.route('/')
 def index():
