@@ -6,109 +6,116 @@ import re
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
-from flask import Flask
 intent = discord.Intents.all()
 intent.message_content = True
-app = Flask(__name__,template_folder="Templates")
-bot = commands.Bot(command_prefix="~", intents=intent , help_command=None)
-theRegex=re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
+app = Flask(__name__, template_folder="Templates")
+theRegex = re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
+
 
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
+
+
 def stay():
     thread = Thread(target=run)
     thread.start()
 
+
 class Bot(commands.Bot):
     def __init__(self):
-        
- super().__init__(command_prefix="t!",intents=discord.Intents.all())
-    
-     async def on_ready(self):
-         print("Bot is online")
-         self.add_cog(Main(self))
+        super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
+        self.add_cog(Main(self))
+
 
 class Main(commands.Cog):
-    def __init__(self,bot):
-        self.bot=bot
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.command()
-    async def hello(self,message):
+    async def hello(self, message):
         print("Hello")
 
     @commands.Cog.listener()
-    async def on_message(self,message):
-       if not (theRegex.match(message.content) == None):
-          await message.delete()   
-       print("onMessage")
+    async def on_message(self, message):
+        if not (theRegex.match(message.content) == None):
+            await message.delete()
+        print("onMessage")
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('目前登入身份：', bot.user)
+        game = discord.Game('EK的電腦')
+        # discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
+        await bot.change_presence(status=discord.Status.online, activity=game)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 SRCLanguage = "zh-TW"
 
-# 起動時呼叫
-@bot.event
-async def on_ready():
-   print('成功登入')
-
 # 收到訊息時呼叫
+bot = Bot()
+
+
 @bot.command(aliases=['trans', 't'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
-   if message is None:
-       await ctx.reply("請輸入要翻譯的內容")
-       return
+    if message is None:
+        await ctx.reply("請輸入要翻譯的內容")
+        return
 
-   # 送信者為Bot時無視
-   if ctx.message.author == bot.user:
-       print("逼逼逼")
-       return
-   else:
-       print("執行成功!")
-       translator = googletrans.Translator()
-       if translator.detect(message).lang == 'zh-CN':  # 判斷text是其他語言則翻成中文
-           pass
-       print(translator.detect(message).lang)
-       if translator.detect(message).lang != "zh-TW":
-           remessage = translator.translate(
-               message, dest='zh-TW').text  # 翻成中文
-           await ctx.reply(remessage)
-       if translator.detect(message).lang != "en":
-           remessageen = translator.translate(message, dest='en').text  # 翻成英文
-           await ctx.reply(remessageen)
+    # 送信者為Bot時無視
+    if ctx.message.author == bot.user:
+        print("逼逼逼")
+        return
+    else:
+        print("執行成功!")
+        translator = googletrans.Translator()
+        if translator.detect(message).lang == 'zh-CN':  # 判斷text是其他語言則翻成中文
+            pass
+        print(translator.detect(message).lang)
+        if translator.detect(message).lang != "zh-TW":
+            remessage = translator.translate(
+                message, dest='zh-TW').text  # 翻成中文
+            await ctx.reply(remessage)
+        if translator.detect(message).lang != "en":
+            remessageen = translator.translate(message, dest='en').text  # 翻成英文
+            await ctx.reply(remessageen)
+
 
 @bot.event
-async def on_raw_reaction_add(payload): 
-  #判斷反映貼圖給予相對應身分組
-  if payload.message_id == 1072171521193300021:
-     if str(payload.emoji) == '✅':
-        print("有進來")
-        guild = bot.get_guild(payload.guild_id) # 取得當前所在伺服器
-        role = guild.get_role(1072098531910881290) #取得伺服器內指定的身分組
-        await payload.member.add_roles(role) # 給予該成員身分組
+async def on_raw_reaction_add(payload):
+    # 判斷反映貼圖給予相對應身分組
+    if payload.message_id == 1072171521193300021:
+        if str(payload.emoji) == ':white_check_mark:':
+            print("有進來")
+            guild = bot.get_guild(payload.guild_id)  # 取得當前所在伺服器
+            role = guild.get_role(1072098531910881290)  # 取得伺服器內指定的身分組
+            await payload.member.add_roles(role)  # 給予該成員身分組
+
+
 @bot.event
 async def on_raw_reaction_remove(payload):
-  if payload.message_id == 1072171521193300021:
-     if str(payload.emoji) == '✅':
-        # 取得伺服器
-        guild = bot.get_guild(payload.guild_id)
-        user = await guild.fetch_member(payload.user_id)
-        await user.remove_roles(guild.get_role(1072098531910881290))
-@bot.event
-async def on_ready():
-    print('目前登入身份：',bot.user)
-    game = discord.Game('EK的電腦')
-    #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
-    await bot.change_presence(status=discord.Status.online, activity=game) 
+    if payload.message_id == 1072171521193300021:
+        if str(payload.emoji) == ':white_check_mark:':
+            # 取得伺服器
+            guild = bot.get_guild(payload.guild_id)
+            user = await guild.fetch_member(payload.user_id)
+            await user.remove_roles(guild.get_role(1072098531910881290))
+
+
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
-   await ctx.send(F'{round(bot.latency*1000)}ms')  
+    await ctx.send(F'{round(bot.latency*1000)}ms')
+
+
 @bot.command()
 async def help(ctx):
     await ctx.send(f"尚在製作中...")
 
 if __name__ == "__main__":
-    token = os.getenv("TOKEN")    
+    token = os.getenv("TOKEN")
     stay()
-    bot=Bot() 
     bot.run(token)
