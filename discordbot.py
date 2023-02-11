@@ -46,7 +46,7 @@ class Main(commands.Cog):
         print('目前登入身份：', bot.user)
         game = discord.Game('EK的電腦')
         # discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
-        await bot.change_presence(status=discord.Status.online, activity=game)
+        await self.bot.change_presence(status=discord.Status.online, activity=game)
 
 
 @app.route('/')
