@@ -28,6 +28,11 @@ SRCLanguage = "zh-TW"
 async def on_ready():
    print('成功登入')
 
+@bot.event
+async def on_message(message:discord.Message):
+    if not (theRegex.match(message.content) == None):
+        await message.delete()
+
 # 收到訊息時呼叫
 @bot.command(aliases=['trans', 't'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
@@ -53,10 +58,6 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
            remessageen = translator.translate(message, dest='en').text  # 翻成英文
            await ctx.reply(remessageen)
 
-@bot.event
-async def on_message(message:discord.Message):
-    if not (theRegex.match(message.content) == None):
-        await message.delete()
 @bot.event
 async def on_raw_reaction_add(payload): 
   #判斷反映貼圖給予相對應身分組
