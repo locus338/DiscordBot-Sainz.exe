@@ -47,45 +47,29 @@ class Main(commands.Cog):
         game = discord.Game('EK的電腦')
         # discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
         await self.bot.change_presence(status=discord.Status.online, activity=game)
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-SRCLanguage = "zh-TW"
-
-# 收到訊息時呼叫
-bot = Bot()
-
-
-    @commands.command(aliases=['trans', 't'])
+    
+    @commands.command()
     async def translate(ctx, *, message: typing.Optional[str] = None):
         print("translate")
         if message is None:
-        await ctx.reply("請輸入要翻譯的內容")
-        return
-
-    # 送信者為Bot時無視
-    if ctx.message.author == bot.user:
-        print("逼逼逼")
-        return
-    else:
-        print("執行成功!")
-        translator = googletrans.Translator()
-        if translator.detect(message).lang == 'zh-CN':  # 判斷text是其他語言則翻成中文
-            pass
-        print(translator.detect(message).lang)
-        if translator.detect(message).lang != "zh-TW":
-            remessage = translator.translate(
-                message, dest='zh-TW').text  # 翻成中文
-            await ctx.reply(remessage)
-        if translator.detect(message).lang != "en":
-            remessageen = translator.translate(message, dest='en').text  # 翻成英文
-            await ctx.reply(remessageen)
-
-
+            await ctx.reply("請輸入要翻譯的內容")
+            return
+        if ctx.message.author == bot.user:
+            print("逼逼逼")
+            return
+        else:
+            print("執行成功!")
+            translator = googletrans.Translator()
+            if translator.detect(message).lang == 'zh-CN':  # 判斷text是其他語言則翻成中文
+                pass
+            print(translator.detect(message).lang)
+            if translator.detect(message).lang != "zh-TW":
+                remessage = translator.translate(
+                    message, dest='zh-TW').text  # 翻成中文
+                await ctx.reply(remessage)
+            if translator.detect(message).lang != "en":
+                remessageen = translator.translate(message, dest='en').text  # 翻成英文
+                await ctx.reply(remessageen)
     @commands.Cog.listener()
     async def on_raw_reaction_add(payload):
         # 判斷反映貼圖給予相對應身分組
@@ -118,7 +102,18 @@ bot = Bot()
     async def help(ctx):
         await ctx.send(f"尚在製作中...")
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+SRCLanguage = "zh-TW"
+
+# 收到訊息時呼叫
+
 if __name__ == "__main__":
     token = os.getenv("TOKEN")
+    bot = Bot()
     stay()
     bot.run(token)
