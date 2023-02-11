@@ -60,12 +60,12 @@ SRCLanguage = "zh-TW"
 bot = Bot()
 
 
-@commands.command(aliases=['trans', 't'])
-async def translate(ctx, *, message: typing.Optional[str] = None):
-    print("translate")
-    if message is None:
-       await ctx.reply("請輸入要翻譯的內容")
-       return
+    @commands.command(aliases=['trans', 't'])
+    async def translate(ctx, *, message: typing.Optional[str] = None):
+        print("translate")
+        if message is None:
+            await ctx.reply("請輸入要翻譯的內容")
+            return
 
     # 送信者為Bot時無視
     if ctx.message.author == bot.user:
@@ -86,35 +86,35 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
             await ctx.reply(remessageen)
 
 
-@commands.Cog.listener()
-async def on_raw_reaction_add(payload):
-    # 判斷反映貼圖給予相對應身分組
-    if payload.message_id == 1072171521193300021:
-        if str(payload.emoji) == '✅':
-            print("有進來")
-            guild = bot.get_guild(payload.guild_id)  # 取得當前所在伺服器
-            role = guild.get_role(1072098531910881290)  # 取得伺服器內指定的身分組
-            payload.member.add_roles(role)  # 給予該成員身分組
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(payload):
+        # 判斷反映貼圖給予相對應身分組
+        if payload.message_id == 1072171521193300021:
+            if str(payload.emoji) == '✅':
+               print("有進來")
+               guild = bot.get_guild(payload.guild_id)  # 取得當前所在伺服器
+               role = guild.get_role(1072098531910881290)  # 取得伺服器內指定的身分組
+               payload.member.add_roles(role)  # 給予該成員身分組
 
 
-@commands.Cog.listener()
-async def on_raw_reaction_remove(payload):
-    if payload.message_id == 1072171521193300021:
-        if str(payload.emoji) == '✅':
-            # 取得伺服器
-            guild = bot.get_guild(payload.guild_id)
-            user = await guild.fetch_member(payload.user_id)
-            await user.remove_roles(guild.get_role(1072098531910881290))
+    @commands.Cog.listener()
+    async def on_raw_reaction_remove(payload):
+        if payload.message_id == 1072171521193300021:
+            if str(payload.emoji) == '✅':
+               # 取得伺服器
+               guild = bot.get_guild(payload.guild_id)
+               user = await guild.fetch_member(payload.user_id)
+               await user.remove_roles(guild.get_role(1072098531910881290))
 
 
-@commands.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
-async def ping(ctx):
-    await ctx.send(F'{round(bot.latency*1000)}ms')
+    @commands.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
+    async def ping(ctx):
+        await ctx.send(F'{round(bot.latency*1000)}ms')
 
 
-@commands.command()
-async def help(ctx):
-    await ctx.send(f"尚在製作中...")
+    @commands.command()
+    async def help(ctx):
+        await ctx.send(f"尚在製作中...")
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")
