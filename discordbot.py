@@ -86,7 +86,7 @@ async def translate(ctx, *, message: typing.Optional[str] = None):
             await ctx.reply(remessageen)
 
 
-@commands.Cog.linstener()
+@commands.Cog.listener()
 async def on_raw_reaction_add(payload):
     # 判斷反映貼圖給予相對應身分組
     if payload.message_id == 1072171521193300021:
@@ -97,7 +97,7 @@ async def on_raw_reaction_add(payload):
             payload.member.add_roles(role)  # 給予該成員身分組
 
 
-@commands.Cog.linstener()
+@commands.Cog.listener()
 async def on_raw_reaction_remove(payload):
     if payload.message_id == 1072171521193300021:
         if str(payload.emoji) == '✅':
