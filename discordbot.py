@@ -27,7 +27,6 @@ class Bot(commands.Bot):
     if Filename.endswith('.py'):
        self.bot.load_extension(F'cmds{Filname[-3]}')
        super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
-       self.add_cog(Main(self))
 
 
 class Main(commands.Cog):
@@ -104,11 +103,6 @@ class Main(commands.Cog):
     @commands.command()
     async def help(self,ctx):
         await ctx.send(f"尚在製作中...")
-
-for Filename in os.listdir('./cmds'):
-    if Filename.endswith('.py'):
-        self.bot.load_extension(F'cmds{Filname[-3]}')
-
 
 
 @app.route('/')
