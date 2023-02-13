@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
+from core.classes import Cog_Extension
 
-class Main(commands.Cog):
+class Main(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
         
