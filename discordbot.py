@@ -23,8 +23,11 @@ def stay():
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
-        self.add_cog(Main(self))
+    for Filename in os.listdir('./cmds'):
+    if Filename.endswith('.py'):
+       self.bot.load_extension(F'cmds{Filname[-3]}')
+       super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
+       self.add_cog(Main(self))
 
 
 class Main(commands.Cog):
@@ -104,7 +107,7 @@ class Main(commands.Cog):
 
 for Filename in os.listdir('./cmds'):
     if Filename.endswith('.py'):
-        bot.load_extension(F'cmds{Filname[-3]}')
+        self.bot.load_extension(F'cmds{Filname[-3]}')
 
 
 
