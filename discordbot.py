@@ -102,6 +102,11 @@ class Main(commands.Cog):
     async def help(self,ctx):
         await ctx.send(f"尚在製作中...")
 
+for Filename in os.listdir('./cmds'):
+    if Filename.endswith('.py'):
+        bot.load_extension(F'cmds{Filname[-3]}')
+
+
 
 @app.route('/')
 def index():
