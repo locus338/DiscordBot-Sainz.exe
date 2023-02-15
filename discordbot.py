@@ -25,10 +25,10 @@ def index():
     return render_template('index.html')
 
 async def load_extensions():
-    for file in os.listdir('./cogs'):  # 抓取所有cog資料夾裡的檔案
+    for file in os.listdir('./cmds'):  # 抓取所有cog資料夾裡的檔案
         if file.endswith('.py'):  # 判斷檔案是否是python檔
             try:
-                await bot.load_extension(f'cogs.{file[:-3]}')
+                await bot.load_extension(f'cmds.{file[:-3]}')
                 print(f'✅ 已加載 {file}')
             except Exception as error:  # 如果cog未正確載入
                 print(f'❌ {file} 發生錯誤  {error}') 
