@@ -25,7 +25,7 @@ class Bot(commands.Bot):
     def __init__(self):        
         for Filename in os.listdir('./cmds'):
             if Filename.endswith('.py'):
-                self.load_extension(F'cmds{Filename[-3]}')
+                self.load_extension(F'cmds.{Filename[-3]}')
         super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
 
 
