@@ -22,11 +22,11 @@ def stay():
 
 
 class Bot(commands.Bot):
-    def __init__(self,bot:commands.Bot):
+    def __init__(self):
         self.bot = bot
         for Filename in os.listdir('./cmds'):
             if Filename.endswith('.py'):
-                self.bot.load_extension(F'cmds{Filename[-3]}')
+                self.load_extension(F'cmds{Filename[-3]}')
         super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
 
 
