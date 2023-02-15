@@ -1,16 +1,17 @@
 import os
 import discord
 import typing
-import googletrans
 import re
+import asyncio
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
+from dotenv import load_dotenv
 intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__, template_folder="Templates")
 theRegex = re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
-
+bot = commands.Bot(command_prefix="~", intents=discord.Intents.all(), help_command=None)
 
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
@@ -20,18 +21,18 @@ def stay():
     thread = Thread(target=run)
     thread.start()
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-class Bot(commands.Bot):
-    def __init__(self):        
-        for file in os.listdir('./cmds'):  # 抓取所有cog資料夾裡的檔案
-            if file.endswith('.py'):  # 判斷檔案是否是python檔
-                try:
-                    # 載入cog,[:-3]是字串切片,為了把.py消除
-                    self.load_extension(f'cmds.{file[:-3]}')
-                    print(f'✅ 已加載 {file}')
-                except Exception as error:  # 如果cog未正確載入
-                    print(f'❌ {file} 發生錯誤  {error}')
-            super().__init__(command_prefix="~", intents=discord.Intents.all(), help_command=None)
+async def load_extensions():
+    for file in os.listdir('./cogs'):  # 抓取所有cog資料夾裡的檔案
+        if file.endswith('.py'):  # 判斷檔案是否是python檔
+            try:
+                await bot.load_extension(f'cogs.{file[:-3]}')
+                print(f'✅ 已加載 {file}')
+            except Exception as error:  # 如果cog未正確載入
+                print(f'❌ {file} 發生錯誤  {error}') 
 
 
 class Main(commands.Cog):
@@ -110,17 +111,19 @@ class Main(commands.Cog):
         await ctx.send(f"尚在製作中...")
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
+@bot.command()
+async def load(ctx,ext):
+    await bot.load_extension(f'Cog.{ext}')
+    await ctx.send(f'{ext} loaded successfully.')
 
 SRCLanguage = "zh-TW"
 
-# 收到訊息時呼叫
+async def main():
+    async with bot:
+        await load_extensions()
+        token = os.getenv("TOKEN")
+        await bot.start(token)
 
 if __name__ == "__main__":
-    token = os.getenv("TOKEN")
-    bot = Bot()
     stay()
-    bot.run(token)
+    asyncio.run(main())
