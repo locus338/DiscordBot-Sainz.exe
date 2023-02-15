@@ -22,8 +22,7 @@ def stay():
 
 
 class Bot(commands.Bot):
-    def __init__(self):
-        self.bot = bot
+    def __init__(self):        
         for Filename in os.listdir('./cmds'):
             if Filename.endswith('.py'):
                 self.load_extension(F'cmds{Filename[-3]}')
