@@ -6,7 +6,6 @@ import asyncio
 from discord.ext import commands
 from threading import Thread
 from flask import Flask, render_template
-from dotenv import load_dotenv
 intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__, template_folder="Templates")
