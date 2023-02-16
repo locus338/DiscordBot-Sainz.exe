@@ -15,6 +15,7 @@ theRegex = re.compile("(http(s){0,}:\/\/){0,}discord\.gg")
 class React(commands.Cog):
   def __init__(self, bot):
       self.bot = bot  
+    
     @commands.command()
     async def hello(self, message):
         print("Hello")
