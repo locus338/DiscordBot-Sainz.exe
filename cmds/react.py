@@ -85,5 +85,5 @@ class React(Cog_Extension):
     async def help(self,ctx):
         await ctx.send(f"尚在製作中...")
 
-def setup(bot):
-    bot.add_cog(React)
+async def setup(bot):
+  await bot.add_cog(React(bot))
