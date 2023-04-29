@@ -8,7 +8,7 @@ from flask import Flask, render_template
 intent = discord.Intents.all()
 intent.message_content = True
 app = Flask(__name__,template_folder="Templates")
-bot = commands.Bot(command_prefix="~", intents=intent , help_command=None)
+bot = commands.Bot(command_prefix="~", intents=intent)
 
 def run():
     app.run(host='0.0.0.0', port=10000, use_reloader=False, debug=True)
@@ -68,18 +68,15 @@ async def on_raw_reaction_remove(payload):
         guild = bot.get_guild(payload.guild_id)
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1101890697822474330))
-
 @bot.event
 async def on_ready():
     print('目前登入身份：',bot.user)
     game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.online, activity=game)
-
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'{round(bot.latency*1000)} (ms)')  
-
 @bot.command(help_command=None)
 async def help(ctx):
     await ctx.send(f"敬請期待")
