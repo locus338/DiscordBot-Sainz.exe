@@ -18,7 +18,7 @@ def stay():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return 'Index Page'
 SRCLanguage = "zh-TW"
 
 # 起動時呼叫
