@@ -76,7 +76,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=game)
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
-   await ctx.send(F'{round(bot.latency*1000)} (ms)')  
+   await ctx.send(F'Render：{round(bot.latency*1000)} (ms)')  
 @bot.command(help_command=None)
 async def help(ctx):
     await ctx.send(f"敬請期待")
