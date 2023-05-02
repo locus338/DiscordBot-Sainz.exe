@@ -69,10 +69,6 @@ async def on_raw_reaction_remove(payload):
         user = await guild.fetch_member(payload.user_id)
         await user.remove_roles(guild.get_role(1101890697822474330))
 @bot.event
-async def on_message(message):
-    if "discord.gg" in message.content:
-        await message.delete()
-@bot.event
 async def on_ready():
     print('目前登入身份：',bot.user)
     game = discord.Game('EK的電腦')
@@ -84,7 +80,11 @@ async def ping(ctx):
 @bot.command(help_command=None)
 async def help(ctx):
     await ctx.send(f"敬請期待")
-
+@bot.event
+async def on_message(message):
+    if "discord.gg" in message.content:
+        await message.delete()
+    
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
