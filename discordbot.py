@@ -56,17 +56,18 @@ async def on_ready():
     game = discord.Game('EK的電腦')
     #discord.Status.<狀態>，可以是online,offline,idle,dnd,invisible
     await bot.change_presence(status=discord.Status.online, activity=game)
+@bot.event
+async def on_message(message):
+    if "我好帥喔" in message.content:
+        await message.delete()
 @bot.command(aliases=['PING', 'PINGS', 'pings', 'Ping', 'Pings'])
 async def ping(ctx):
    await ctx.send(F'Render：{round(bot.latency*1000)}ms')  
 @bot.command(help_command=None)
 async def help(ctx):
     await ctx.send(f"敬請期待")
-@bot.event
-async def on_message(message):
-    if "discord.gg" in message.content:
-        await message.delete()
-    
+
+
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
