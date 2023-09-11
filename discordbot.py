@@ -21,34 +21,31 @@ def index():
     return 'Index Page'
 SRCLanguage = "zh-TW"
 
-# 起動時呼叫
 @bot.event
 async def on_ready():
    print('成功登入')
 
-# 收到訊息時呼叫
 @bot.command(aliases=['trans', 't','T','Trans','TRANS'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
    if message is None:
        await ctx.reply("請輸入要翻譯的內容")
        return
 
-   # 送信者為Bot時無視
    if ctx.message.author == bot.user:
        print("逼逼逼")
        return
    else:
        print("執行成功!")
        translator = googletrans.Translator()
-       if translator.detect(message).lang == 'zh-CN':  # 判斷text是其他語言則翻成中文
+       if translator.detect(message).lang == 'zh-CN':
            pass
        print(translator.detect(message).lang)
        if translator.detect(message).lang != "zh-TW":
            remessage = translator.translate(
-               message, dest='zh-TW').text  # 翻成中文
+               message, dest='zh-TW').text
            await ctx.reply(remessage)
        if translator.detect(message).lang != "en":
-           remessageen = translator.translate(message, dest='en').text  # 翻成英文
+           remessageen = translator.translate(message, dest='en').text
            await ctx.reply(remessageen)
 @bot.event
 async def on_ready():
@@ -63,7 +60,7 @@ async def ping(ctx):
 
 @bot.command(help_command=None)
 async def help(ctx):
-    await ctx.send(f"敬請期待")
+    await ctx.send(f"~translate開始使用 別名：trans,t,T,Trans,TRANS")
 
 
 if __name__ == "__main__":
