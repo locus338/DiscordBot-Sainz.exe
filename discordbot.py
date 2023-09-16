@@ -60,7 +60,8 @@ async def ping(ctx):
 
 @bot.command(help_command=None)
 async def help(ctx):
-    await ctx.send(f"~translate開始使用 別名：trans,t,T,Trans,TRANS")
+    await ctx.send(f"~`translate`開始翻譯 
+別名：`trans` `t` `T` `Trans` `TRANS`")
 
 
 if __name__ == "__main__":
