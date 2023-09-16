@@ -62,7 +62,6 @@ async def ping(ctx):
 async def help(ctx):
     await ctx.send(f"~`translate`開始翻譯                                                                                                                                                                        別名：`trans` `t` `T` `Trans` `TRANS`")
 
-
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
     stay()
