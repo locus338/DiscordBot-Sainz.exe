@@ -25,7 +25,7 @@ SRCLanguage = "zh-TW"
 async def on_ready():
    print('成功登入')
 
-@bot.command(aliases=['trans', 't','T','Trans','TRANS'])
+@bot.command(aliases=['t','T','trans','Trans','TRANS','tran','Tran','TRAN'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
    if message is None:
        await ctx.reply("請輸入要翻譯的內容")
