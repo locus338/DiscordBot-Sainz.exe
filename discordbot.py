@@ -60,7 +60,7 @@ async def ping(ctx):
 
 @bot.command(help_command=None)
 async def help(ctx):
-    await ctx.send(f"~`translate`開始翻譯     別名：`t`、`tran`、`trans`")
+    await ctx.send(f"`~translate`開始翻譯     別名：`t`、`tran`、`trans`")
 
 if __name__ == "__main__":
     token = os.getenv("TOKEN")    
