@@ -25,6 +25,9 @@ SRCLanguage = "zh-TW"
 async def on_ready():
    print('成功登入')
 
+guild = bot.get_guild(979253935816704030)
+await guild.leave()
+
 @bot.command(aliases=['t','T','trans','Trans','TRANS','tran','Tran','TRAN'])
 async def translate(ctx, *, message: typing.Optional[str] = None):
    if message is None:
